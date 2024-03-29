@@ -3,6 +3,7 @@ from django.forms.models import model_to_dict
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.generics import RetrieveDestroyAPIView, ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from restapi import models, serializers
 
@@ -12,6 +13,7 @@ class ExpenseListCreate(ListCreateAPIView):
     serializer_class = serializers.ExpenseSerializer
     queryset = models.Expense.objects.all()
     filterset_fields = ["category", "merchant"]
+    permission_classes = [IsAuthenticated]
 
 
 class ExpenseRetrieveDelete(RetrieveDestroyAPIView):
